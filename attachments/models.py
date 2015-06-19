@@ -13,6 +13,17 @@ from django.utils.translation import ugettext_lazy as _
 UserModel = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
 
+def attachment_upload(instance, filename):
+    """
+    Stores the attachment in a "per module/appname/primary key" folder
+    """
+    return 'attachments/%s/%s/%s' % (
+        '%s_%s' % (instance.content_object._meta.app_label,
+                   instance.content_object._meta.object_name.lower()),
+        instance.content_object.pk,
+        filename)
+
+
 class AttachmentManager(models.Manager):
     def attachments_for_object(self, obj):
         object_type = ContentType.objects.get_for_model(obj)
@@ -21,16 +32,6 @@ class AttachmentManager(models.Manager):
 
 
 class Attachment(models.Model):
-    def attachment_upload(instance, filename):
-        """
-        Stores the attachment in a "per module/appname/primary key" folder
-        """
-        return 'attachments/%s/%s/%s' % (
-            '%s_%s' % (instance.content_object._meta.app_label,
-                       instance.content_object._meta.object_name.lower()),
-            instance.content_object.pk,
-            filename)
-
     objects = AttachmentManager()
 
     content_type = models.ForeignKey(ContentType)
