@@ -20,17 +20,18 @@ class AttachmentManager(models.Manager):
                            object_id=obj.id)
 
 
-class Attachment(models.Model):
-    def attachment_upload(instance, filename):
-        """
-        Stores the attachment in a "per module/appname/primary key" folder
-        """
-        return 'attachments/%s/%s/%s' % (
-            '%s_%s' % (instance.content_object._meta.app_label,
-                       instance.content_object._meta.object_name.lower()),
-            instance.content_object.pk,
-            filename)
+def attachment_upload(instance, filename):
+    """
+    Stores the attachment in a "per module/appname/primary key" folder
+    """
+    return 'attachments/%s/%s/%s' % (
+        '%s_%s' % (instance.content_object._meta.app_label,
+                   instance.content_object._meta.object_name.lower()),
+        instance.content_object.pk,
+        filename)
 
+
+class Attachment(models.Model):
     objects = AttachmentManager()
 
     content_type = models.ForeignKey(ContentType)
