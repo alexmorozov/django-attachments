@@ -27,7 +27,6 @@ def add_attachment(request, app_label, model_name, pk,
                    template_name='attachments/add.html', extra_context={}):
 
     next = request.POST.get('next', '/')
-
     if not request.user.has_perm('attachments.add_attachment'):
         return HttpResponseRedirect(next)
 
