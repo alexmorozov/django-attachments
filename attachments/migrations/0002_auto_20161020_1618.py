@@ -18,11 +18,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='attachment',
-            name='is_public',
-            field=models.BooleanField(default=False, verbose_name='\u0414\u043e\u0441\u0442\u0443\u043f\u0435\u043d \u043a\u043b\u0438\u0435\u043d\u0442\u0443'),
-        ),
-        migrations.AddField(
-            model_name='attachment',
             name='name',
             field=models.CharField(max_length=1024, null=True, verbose_name='\u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435', blank=True),
         ),
