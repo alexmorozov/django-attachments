@@ -1,9 +1,12 @@
-from attachments.models import Attachment
+from __future__ import unicode_literals
+
+from django.contrib.contenttypes.admin import GenericTabularInline
 from attachments.forms import AttachmentForm
-from django.contrib.contenttypes import generic
+from attachments.models import Attachment
 
 
-class AttachmentInlines(generic.GenericTabularInline):
+class AttachmentInlines(GenericTabularInline):
     model = Attachment
     form = AttachmentForm
+    exclude = ()
     extra = 1

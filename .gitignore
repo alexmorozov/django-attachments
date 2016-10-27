@@ -1,3 +1,4 @@
+attachments/tests/testapp/uploads/
 *.pyc
-*.sw[op]
-*.egg-info/
+.idea/
+.git/
